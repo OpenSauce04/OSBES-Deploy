@@ -24,15 +24,19 @@ if "device\n" in devices:
   print("Removing previous OSBES installation (if present)")
   os.system("adb shell rm -rf sdcard/games/com.mojang/development_resource_packs/OSBES/")
 
-  print("Copying OSBES directory's files to temporary folder...")
-  os.system("rmdir /Q /S ./tmp")
-  os.system("mkdir tmp")
-  os.system("xcopy ./ ./tmp /s /e /h")
+  print("Copying OSBES directory's files to temporary folder... (this may take a while)")
+  os.system("rmdir /Q /S ..\\tmp")
+  os.system("mkdir ..\\tmp")
+  os.system("robocopy ..\\ ..\\tmp /E > nul")
 
   print("Cleaning up before copying to device...")
-  os.system("rm tmp/Deploy.py")
-  os.system("rmdir /Q /S ./tmp/adb")
-  os.system("rmdir /Q /S ./tmp/.github")
+  os.system("del ..\\tmp\\Deploy.py")
+  os.system("rmdir /Q /S ..\\tmp\\adb")
+  os.system("rmdir /Q /S ..\\tmp\\.github")
+  os.system("rmdir /Q /S ..\\tmp\\.git > nul")
+  
+  os.system("rmdir /Q /S ..\\tmp")
+  print("done")
 
 else: 
   print("Device not found, please check that ADB is set up correctly on your device")
