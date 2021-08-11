@@ -22,21 +22,28 @@ if "device\n" in devices:
   os.system("adb shell am force-stop com.mojang.minecraftpe")
 
   print("Removing previous OSBES installation (if present)")
-  os.system("adb shell rm -rf sdcard/games/com.mojang/development_resource_packs/OSBES/")
+  os.system("adb shell rm -rf /sdcard/games/com.mojang/development_resource_packs/OSBES/")
 
-  print("Copying OSBES directory's files to temporary folder... (this may take a while)")
+  print("Copying OSBES directory's files to temporary folder...")
   os.system("rmdir /Q /S ..\\tmp")
   os.system("mkdir ..\\tmp")
   os.system("robocopy ..\\ ..\\tmp /E > nul")
 
   print("Cleaning up before copying to device...")
   os.system("del ..\\tmp\\Deploy.py")
-  os.system("rmdir /Q /S ..\\tmp\\adb")
-  os.system("rmdir /Q /S ..\\tmp\\.github")
+  os.system("rmdir /Q /S ..\\tmp\\adb > nul")
+  os.system("rmdir /Q /S ..\\tmp\\.github > nul")
   os.system("rmdir /Q /S ..\\tmp\\.git > nul")
+  os.system("rmdir /Q /S ..\\tmp\\tmp > nul") # I have no idea where this folder is coming from
   
+  print("Copying to device...")
+  os.system("adb shell mkdir sdcard/games/com.mojang/development_resource_packs/OSBES")
+  os.system("adb push ../tmp/. /sdcard/games/com.mojang/development_resource_packs/OSBES/")
+
+  print("Cleaning up")
   os.system("rmdir /Q /S ..\\tmp")
-  print("done")
+
+  print("\nDone; Press enter to close")
 
 else: 
   print("Device not found, please check that ADB is set up correctly on your device")
