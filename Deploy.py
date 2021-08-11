@@ -43,6 +43,9 @@ if "device\n" in devices:
   print("Cleaning up")
   os.system("rmdir /Q /S ..\\tmp")
 
+  print("Opening Minecraft...")
+  os.system("adb shell monkey -p com.mojang.minecraftpe -c android.intent.category.LAUNCHER 1")
+
   print("\nDone; Press enter to close")
 
 else: 
