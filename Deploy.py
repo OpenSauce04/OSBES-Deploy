@@ -47,6 +47,9 @@ if "device\n" in devices:
   print("Opening Minecraft...")
   os.system("adb shell monkey -p com.mojang.minecraftpe -c android.intent.category.LAUNCHER 1")
 
+  print("Killing ADB server...")
+  os.system("adb kill-server")
+  
   print("\nDone; Press enter to close")
 
 else: 
