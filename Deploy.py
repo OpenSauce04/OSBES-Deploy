@@ -1,5 +1,5 @@
 print("!!!IF YOU DON'T KNOW WHAT YOU ARE DOING, DON'T USE THIS!!!")
-print("v0.0.1\n")
+print("v0.0.2\n")
 print("Starting ADB server...")
 import os
 import subprocess
